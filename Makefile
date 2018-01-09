@@ -1,15 +1,15 @@
 CC = gcc
 CXX = g++
 
-CFLAGS = -W -Wall -Wextra -ansi -pedantic -lm -O2 -Wno-unused-function
-CXXFLAGS = -W -Wall -Wextra -ansi -pedantic -O2
+CFLAGS = -W -Wall -Wextra -ansi -pedantic -lm -O3 -Wno-unused-function
+CXXFLAGS = -W -Wall -Wextra -ansi -pedantic -O3
 
 ZOPFLILIB_SRC = src/zopfli/blocksplitter.c src/zopfli/cache.c\
                 src/zopfli/deflate.c src/zopfli/gzip_container.c\
                 src/zopfli/hash.c src/zopfli/katajainen.c\
                 src/zopfli/lz77.c src/zopfli/squeeze.c\
                 src/zopfli/tree.c src/zopfli/util.c\
-                src/zopfli/zlib_container.c src/zopfli/zopfli_lib.c
+                src/zopfli/zlib_container.c src/zopfli/zopfli_lib.c src/zopfli/functionTimer.c
 ZOPFLILIB_OBJ := $(patsubst src/zopfli/%.c,%.o,$(ZOPFLILIB_SRC))
 ZOPFLIBIN_SRC := src/zopfli/zopfli_bin.c
 LODEPNG_SRC := src/zopflipng/lodepng/lodepng.cpp src/zopflipng/lodepng/lodepng_util.cpp

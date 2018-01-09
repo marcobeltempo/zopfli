@@ -32,6 +32,7 @@ decompressor.
 #include "deflate.h"
 #include "gzip_container.h"
 #include "zlib_container.h"
+#include "functionTimer.h"
 
 /* Windows workaround for stdout output. */
 #if _WIN32
@@ -152,7 +153,7 @@ int main(int argc, char* argv[]) {
 
   for (i = 1; i < argc; i++) {
     const char* arg = argv[i];
-    if (StringsEqual(arg, "-v")) options.verbose = 1;
+    if (StringsEqual(arg, "-v")) {options.verbose = 1; }
     else if (StringsEqual(arg, "-c")) output_to_stdout = 1;
     else if (StringsEqual(arg, "--deflate")) {
       output_type = ZOPFLI_FORMAT_DEFLATE;
@@ -214,6 +215,6 @@ int main(int argc, char* argv[]) {
     fprintf(stderr,
             "Please provide filename\nFor help, type: %s -h\n", argv[0]);
   }
-
+getFunctionTimerStats();
   return 0;
 }

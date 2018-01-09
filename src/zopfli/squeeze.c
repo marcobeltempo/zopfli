@@ -28,6 +28,8 @@ Author: jyrki.alakuijala@gmail.com (Jyrki Alakuijala)
 #include "symbols.h"
 #include "tree.h"
 #include "util.h"
+#include "functionTimer.h"
+#include <time.h>
 
 typedef struct SymbolStats {
   /* The literal and length symbols. */
@@ -226,6 +228,7 @@ static double GetBestLengths(ZopfliBlockState *s,
   unsigned short leng;
   unsigned short dist;
   unsigned short sublen[259];
+
   size_t windowstart = instart > ZOPFLI_WINDOW_SIZE
       ? instart - ZOPFLI_WINDOW_SIZE : 0;
   double result;
@@ -233,8 +236,11 @@ static double GetBestLengths(ZopfliBlockState *s,
   double mincostaddcostj;
 
   if (instart == inend) return 0;
-
+  startTimer();
+  
   ZopfliResetHash(ZOPFLI_WINDOW_SIZE, h);
+  stopTimer();
+
   ZopfliWarmupHash(in, windowstart, inend, h);
   for (i = windowstart; i < instart; i++) {
     ZopfliUpdateHash(in, i, inend, h);
@@ -304,7 +310,6 @@ static double GetBestLengths(ZopfliBlockState *s,
 
   assert(costs[blocksize] >= 0);
   result = costs[blocksize];
-
   return result;
 }
 
