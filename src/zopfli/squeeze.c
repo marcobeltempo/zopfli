@@ -236,8 +236,8 @@ static double GetBestLengths(ZopfliBlockState *s,
   double mincostaddcostj;
 
   if (instart == inend) return 0;
-  startTimer();
   
+  startTimer();
   ZopfliResetHash(ZOPFLI_WINDOW_SIZE, h);
   stopTimer();
 
